@@ -1,0 +1,17 @@
+* {
+  font-size: 1.2rem;
+}
+
+.App > div {
+  margin-bottom: 30px;
+}
+.App button,
+.App input {
+  padding: 10px 20px;
+  margin-right: 20px;
+}
+.App .box {
+  width: 250px;
+  height: 100px;
+  background: #6666ffaa;
+}
