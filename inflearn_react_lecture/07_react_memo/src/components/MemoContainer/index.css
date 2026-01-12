@@ -1,0 +1,22 @@
+.MemoContainer {
+  flex: 1; /*남은 만큼 영역을 채워라 라는 뜻*/
+  padding: 20px;
+}
+
+.MemoContainer__title {
+  width: 100%;
+  box-sizing: border-box; /*이 속성 한번 보기*/
+  font-size: 2rem;
+  border: none;
+  margin-bottom: 10px;
+  outline: none;
+}
+
+.MemoContainer__content {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1.1rem;
+  min-height: 600px;
+  border: none;
+  outline: none;
+}

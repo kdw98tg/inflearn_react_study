@@ -1,7 +1,19 @@
 import { useState } from 'react';
 import './App.css';
-import MemoContainer from './components/MemoContainerComponent';
+import MemoContainer from './components/MemoContainer';
 import SideBar from './components/SideBar';
+import { setItem } from './lib/storage';
+
+// 브라우저에는 크게 2가지 스토리지가 있음
+// 로컬 스토리지와 세션임
+// 둘 다 key-value 쌍으로 저장함
+// 쿠키는 사용자의 행동을 기록했다가, 서버로 전달함
+// 쿠키가 많아지면, 네트워크가 비효율적이게 됨
+// 그래서 localstroage가 포함됨
+// 네트워크에 포함아 ㄴ돼서 비효율 없어짐
+// local storage는 직접 지우지 않는 이상 브라우저를 껐다 켜도 유지됨
+// session은 탭안에서는 유지, 창 닫으면 삭제
+//local storage는 문자열만 저장이 됨
 
 function App() {
   const [memos, setMemos] = useState([
@@ -33,12 +45,16 @@ function App() {
     //참조의 변형이 없어서, 참조를 새로 넣어줘야 리랜더링이 일어남
     //새로운 배열은 만들어서 값만 넣어주는 식으로 참조를 바꿔줌
     setMemos(newMemos);
-
     //?원본은 아예 안바꾸는건가?
+
+    // localStorage.setItem('memo', JSON.stringify(newMemos));
+    // setItem('memo', newMemos);
   };
 
   const addMemo = () => {
     const now = new Date().getTime();
+
+    const newMemos = [...memos];
 
     setMemos([
       ...memos,
@@ -50,7 +66,25 @@ function App() {
       },
     ]);
 
+    // setItem('memo', newMemos);
+
     setSelectedMemoIndex(memos.length);
+  };
+
+  const deleteMemo = (index) => {
+    // memos.splice(index, 1);
+
+    // setMemos(memos);
+
+    const newMemos = [...memos];
+
+    newMemos.splice(index, 1);
+
+    setMemos(newMemos);
+
+    if (index === selectedMemoIndex) {
+      setSelectedMemoIndex(0);
+    }
   };
 
   return (
@@ -60,6 +94,7 @@ function App() {
         setSelectedMemoIndex={setSelectedMemoIndex}
         selectedMemoIndex={selectedMemoIndex}
         addMemo={addMemo}
+        deleteMemo={deleteMemo}
       />
       <MemoContainer memo={memos[selectedMemoIndex]} setMemo={setMemo} />
     </div>
