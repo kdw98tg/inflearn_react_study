@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import QuestionBox from '../../components/QuestionBox';
 import ProgressIndicator from '../../components/ProgressIndicator';
 import { useState } from 'react';
+import styled from 'styled-components';
 
 //파라미터들을 꺼내오는 훅스
 import { useParams } from 'react-router-dom';
@@ -42,8 +43,7 @@ function SurveyPage() {
 
   const [answers, setAnswers] = useState(['']);
   return (
-    <div>
-      <div className="App">
+    <SurveyPageWrapper>
         <ProgressIndicator />
         <QuestionBox
           question={questions[step]}
@@ -58,8 +58,12 @@ function SurveyPage() {
             });
           }}
         />
-      </div>
-    </div>
+    </SurveyPageWrapper>
   );
 }
+
+const SurveyPageWrapper = styled.div`
+  width: 100%;
+  min-height: 100%;
+`;
 export default SurveyPage;

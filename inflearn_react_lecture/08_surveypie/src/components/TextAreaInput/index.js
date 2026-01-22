@@ -18,6 +18,7 @@ const TextArea = styled.textarea`
   border-radius: 5px;
   font-size: 18px;
   line-height: 21px;
+  width:100%;
   padding: 12px 18px;
   height: 196px;
   resize: none;

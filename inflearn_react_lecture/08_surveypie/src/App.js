@@ -10,17 +10,42 @@
 import { Routes, Route } from 'react-router-dom';
 import CompletionPage from './pages/CompletionPage';
 import SurveyPage from './pages/SurveyPage';
+import styled from 'styled-components';
+import './index.css';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/done" element={<CompletionPage />} />
-      <Route path="/survey/:surveyId/" element={<SurveyPage />}>
-        <Route path=":step" element={<SurveyPage />} />
-      </Route>
-    </Routes>
+    <AppWraper>
+      <Box>
+        <Routes>
+          <Route path="/done" element={<CompletionPage />} />
+          <Route path="/survey/:surveyId/" element={<SurveyPage />}>
+            <Route path=":step" element={<SurveyPage />} />
+          </Route>
+        </Routes>
+      </Box>
+    </AppWraper>
   );
 }
+
+const Box = styled.div`
+  background-color: #ffffff;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.07);
+  border-radius: 16px;
+  width: 700px;
+  min-height: 500px;
+  padding: 60px;
+  display:flex;
+  box-sizing:border-box;
+`;
+
+const AppWraper = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5e5e5;
+`;
 
 /*survey 페이지에서 추가로 필요한 것 : 설문 ID 가 필요함
 
