@@ -8,7 +8,7 @@ const colorMap = {
 };
 
 const Button = styled.button`
-  width: 200px;
+  min-width: 200px;
   padding: 24px 16px;
 
   border-radius: 4px;
@@ -16,6 +16,7 @@ const Button = styled.button`
   background: ${({ type }) => colorMap[type].BUTTON.DEFAULT.BACKGROUND};
   border: none;
   font-weight: bold;
+  font-size: 18px;
 
   border: ${({ type }) =>
     type === 'TERTIARY'

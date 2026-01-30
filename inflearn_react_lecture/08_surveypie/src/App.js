@@ -14,12 +14,12 @@ import styled from 'styled-components';
 import './index.css';
 
 function App() {
-  return (
+return (
     <AppWraper>
       <Box>
         <Routes>
-          <Route path="/done" element={<CompletionPage />} />
-          <Route path="/survey/:surveyId/" element={<SurveyPage />}>
+          <Route path="/done/:surveyId" element={<CompletionPage />} />
+          <Route path="/survey/:surveyId" element={<SurveyPage />}>
             <Route path=":step" element={<SurveyPage />} />
           </Route>
         </Routes>
@@ -30,13 +30,13 @@ function App() {
 
 const Box = styled.div`
   background-color: #ffffff;
-  box-shadow: 0px 2px 10px rgba(0,0,0,0.07);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.07);
   border-radius: 16px;
   width: 700px;
   min-height: 500px;
   padding: 60px;
-  display:flex;
-  box-sizing:border-box;
+  display: flex;
+  box-sizing: border-box;
 `;
 
 const AppWraper = styled.div`
