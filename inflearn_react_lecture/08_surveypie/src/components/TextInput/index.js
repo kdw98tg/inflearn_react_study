@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-function TextInput({ answer='', setAnswer, options }) {
+function TextInput({ answer = '', setAnswer, options }) {
   return (
     <Input
       type="text"
@@ -8,6 +8,8 @@ function TextInput({ answer='', setAnswer, options }) {
         setAnswer(event.target.value);
       }}
       placeholder={options.placeholder}
+      //구조분해문법?이 뭐지
+      {...(options?.max && { maxLength: options?.max })}
     />
   );
 }

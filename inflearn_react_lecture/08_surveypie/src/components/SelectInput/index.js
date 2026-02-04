@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 //컴포넌트로 빼서 관리해도 됨
-function Item({ children, onChange }) {
+function Item({ children, checked, onChange }) {
   return (
     <ItemWrapper>
       <label>
-        <input type="checkbox" onChange={onChange} />
+        <input type="checkbox" checked={checked} onChange={onChange} />
         <span />
         <div>{children}</div>
       </label>
@@ -48,11 +48,17 @@ const ItemWrapper = styled.div`
 `;
 
 function SelectInput({ answer = [], setAnswer, options }) {
-  
   const handleChange = (isChecked, index) => {
     console.log('answer', answer, index, isChecked);
     if (isChecked) {
       //setAnser(index 추가)
+      const max = options?.max ?? 1;
+
+      //최대 선택 개수보다 크면 로직 수행 안함
+      if (answer.length >= max) {
+        return;
+      }
+
       setAnswer([...answer, index]);
     } else {
       //setAnswer(index 빼기)
@@ -66,6 +72,7 @@ function SelectInput({ answer = [], setAnswer, options }) {
         return (
           <Item
             key={index}
+            checked={answer.includes(index)}
             onChange={(e) => {
               handleChange(e.target.checked, index);
             }}

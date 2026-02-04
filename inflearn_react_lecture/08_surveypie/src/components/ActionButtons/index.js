@@ -8,14 +8,17 @@ import postAnswers from '../../services/postAnswers';
 import useSurveyId from '../../hooks/useSurveyId';
 import useAnswers from '../../hooks/useAnswers';
 import { useState } from 'react';
+import useRequiredOption from '../../hooks/useRequiredOption';
 
-function ActionButtons({}) {
+function ActionButtons({ }) {
   const step = useStep();
   const surveyId = useSurveyId();
-  const answers = useAnswers();
+  const [answers, setAnswer] = useAnswers();
   const [isPosting, setIsPosting] = useState(false);
+  const isRequired = useRequiredOption();
 
   const questionsLength = useRecoilValue(questionsLengthState);
+  const isBlockToNext = isRequired ? !answers[step]?.length : false;
 
   const isLast = questionsLength - 1 === step;
 
@@ -41,6 +44,7 @@ function ActionButtons({}) {
             setIsPosting(true);
             postAnswers(surveyId, answers)
               .then(() => {
+                setAnswer([]);
                 navigate(`/done/${surveyId}`);
               })
               .catch((error) => {
@@ -49,7 +53,7 @@ function ActionButtons({}) {
                 setIsPosting(false);
               });
           }}
-          disabled={isPosting}
+          disabled={isPosting || isBlockToNext}
         >
           {isPosting ? '제출중입니다...' : '제출'}
         </Button>
@@ -59,6 +63,7 @@ function ActionButtons({}) {
           onClick={() => {
             navigate(`${step + 1}`);
           }}
+          disabled={isBlockToNext}
         >
           다음
         </Button>

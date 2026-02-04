@@ -7,9 +7,10 @@ import useSurveyId from './useSurveyId';
 
 function useCurrentQuestion() {
   const step = useStep();
-  const surveyId = useSurveyId();
-  const [surveyData, setSurvey] = useRecoilState(surveyState);
+  const surveyData = useRecoilValue(surveyState);
   const questions = surveyData?.questions || [];
+
+  return questions[step];
 
   // useEffect(() => {
   //   axios.get(`http://localhost:3001/surveys/${surveyId}`).then((result) => {
@@ -18,7 +19,6 @@ function useCurrentQuestion() {
   //   });
   // }, [surveyId, setSurvey]);
 
-  return questions[step];
 }
 
 export default useCurrentQuestion;
